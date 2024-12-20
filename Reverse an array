@@ -1,0 +1,18 @@
+in this we have different approaches to solve this problem:
+Naive approach: in this we have use temp array TC: O(n) SC : O(n)
+Two Pointers : in this we have use left and right ptr TC: O(n) SC: O(1)
+swap element : in this we swap the element TC: O(n) SC : O(n)
+
+class Solution {
+  public:
+    void reverseArray(vector<int> &arr) {
+        // code here
+        int n = arr.size(); // size of array
+        int start =0 , end = n-1; // two pointers point to start and end
+        while(start < end){
+            swap(arr[start] , arr[end]); // swap start and end element
+            start++; //increment start ptr
+            end--; //decrement end ptr
+        }
+    }
+};
