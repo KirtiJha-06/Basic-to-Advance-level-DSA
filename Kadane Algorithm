@@ -1,0 +1,18 @@
+TC = O(n); SC = O(1);
+
+class Solution {
+  public:
+    // Function to find the sum of contiguous subarray with maximum sum.
+    long long maxSubarraySum(vector<int> &arr) {
+        long long ans = INT_MIN; // Initialize to the smallest possible value
+        long long sum = 0;       // Variable to track the current subarray sum
+
+        for (int i = 0; i < arr.size(); i++) {
+            sum += arr[i];       // Add the current element to the running sum
+            ans = max(ans, sum); // Update the maximum sum encountered so far
+            if (sum < 0)         // If the running sum becomes negative
+                sum = 0;         // Reset it to 0 to start a new subarray
+        }
+        return ans;              // Return the maximum sum found
+    }
+};
