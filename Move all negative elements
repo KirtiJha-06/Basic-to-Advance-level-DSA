@@ -1,0 +1,23 @@
+TC = O(n) SC = O(n)
+
+class Solution {
+  public:
+    void segregateElements(vector<int>& arr) {
+        // Your code goes here
+         vector<int> pos, neg; // Create two vectors to store positive and negative numbers separately
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] >= 0) {
+                pos.push_back(arr[i]); // If the element is non-negative, add it to the 'pos' vector
+            } else {
+                neg.push_back(arr[i]); // If the element is negative, add it to the 'neg' vector
+            }
+        }
+        int i = 0; // Initialize index to overwrite the original array
+        for(int j = 0; j < pos.size(); j++) {
+            arr[i++] = pos[j]; // Copy all elements from the 'pos' vector to the original array
+        }
+        for(int j = 0; j < neg.size(); j++) {
+            arr[i++] = neg[j]; // Copy all elements from the 'neg' vector to the original array
+        }
+    }
+};
