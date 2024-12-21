@@ -1,0 +1,35 @@
+TC = O(n) , SC = O(1)
+
+class Solution
+{
+    public:
+    void sort012(int a[], int n)
+    {
+        // code here
+        int zeroes =0;
+        int ones = 0;
+        int twos =0;
+        for(int i =0; i<n; i++){
+            if(a[i]==0){
+                zeroes++;
+            }
+            else if(a[i]==1){
+                ones++;
+            }
+            else{
+                twos++;
+            }
+        }
+        int i =0;
+        while(zeroes--){
+            a[i++] =0;
+        }
+        while(ones--){
+            a[i++] = 1;
+        }
+        while(twos--){
+            a[i++] = 2;
+        }
+    }
+    
+};
