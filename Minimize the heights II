@@ -1,0 +1,31 @@
+TC : O(nlogn)
+SC : O(1)
+
+class Solution {
+  public:
+    int getMinDiff(vector<int> &arr, int k) {
+        // Step 1: Sort the array to arrange heights in increasing order
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        
+        // Step 2: Initialize the result as the unmodified difference
+        int res = arr[n-1] - arr[0];
+        
+        // Step 3: Iterate through the array to find the minimized difference
+        for (int i = 0; i < n; i++) {
+            // Skip if subtracting k results in a negative height
+            if (arr[i] - k < 0)
+                continue;
+            
+            // Step 4: Calculate the new minimum and maximum heights
+            int minH = min(arr[0] + k, arr[i] - k);  // Min of increased smallest and reduced current
+            int maxH = max(arr[i-1] + k, arr[n-1] - k);  // Max of increased previous and reduced largest
+            
+            // Step 5: Update the result with the minimized difference
+            res = min(res, maxH - minH);
+        }
+        
+        // Step 6: Return the minimized difference
+        return res;
+    }
+};
