@@ -1,0 +1,40 @@
+
+TC = O(n1 + n2 + n3);
+SC = O(n2+ n3+ min(n1, n2, n3);
+
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+vector<int> findCommonElements(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+    vector<int> result;
+    unordered_map<int, int> mp;  // To track elements in arr2
+    
+    // Store occurrences of elements from arr2
+    for (int i : arr2) {
+        mp[i]++;
+    }
+    
+    unordered_map<int, int> mp2;  // To track elements in arr3
+    
+    // Store occurrences of elements from arr3
+    for (int i : arr3) {
+        mp2[i]++;
+    }
+    
+    // Check for common elements in arr1, arr2, and arr3
+    for (int i : arr1) {
+        if (mp.find(i) != mp.end() && mp2.find(i) != mp2.end()) {
+            result.push_back(i);  // Add common element to result
+            mp.erase(i);          // Remove element to avoid duplicates
+            mp2.erase(i);         // Remove element to avoid duplicates
+        }
+    }
+    
+    // If no common elements are found, return {-1}
+    if (result.empty()) {
+        return {-1};
+    }
+    
+    return result;  // Return the result
+}
