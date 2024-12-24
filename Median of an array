@@ -1,0 +1,19 @@
+TC : O(nlogn)
+SC : O(1)
+
+double findMedian(vector<int>& arr) {
+    // Step 1: Sort the array in non-decreasing order
+    sort(arr.begin(), arr.end());
+    
+    // Step 2: Get the size of the array
+    int n = arr.size();
+    
+    // Step 3: Check if the array size is odd
+    if (n % 2 != 0) {
+        // For odd-sized array, return the middle element
+        return arr[n / 2];
+    } else {
+        // For even-sized array, return the average of the two middle elements
+        return (arr[n / 2] + arr[n / 2 - 1]) / 2.0;
+    }
+}
