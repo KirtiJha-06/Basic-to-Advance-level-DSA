@@ -1,0 +1,22 @@
+TC = O(n.d)
+SC = O(1)
+
+bool PalinArray(vector<int>& arr) {
+    // Iterate through each number in the array
+    for (int num : arr) {
+        int original = num, reversed = 0;
+
+        // Reverse the digits of the number
+        while (num > 0) {
+            reversed = reversed * 10 + num % 10;  // Add last digit of num to reversed
+            num /= 10;  // Remove last digit from num
+        }
+
+        // Check if the reversed number is equal to the original number
+        if (reversed != original) {
+            return false;  // If not equal, return false as it's not a palindrome
+        }
+    }
+
+    return true;  // If all numbers are palindromes, return true
+}
