@@ -1,0 +1,29 @@
+// User function template for C++
+TC: (n^2log10(n));
+SC : (n.log10(n));
+
+class Solution {
+  public:
+  
+ void multiply(vector<int>& fac, int n) {
+    int carry = 0;
+    for (int i = 0; i < fac.size(); i++) {
+        int data = fac[i] * n + carry; // Multiply each digit and add carry
+        fac[i] = data % 10;           // Update the current digit
+        carry = data / 10;            // Extract the carry
+    }
+    while (carry) {
+        fac.push_back(carry % 10);    // Append remaining carry as new digits
+        carry /= 10;
+    }
+}
+
+    vector<int> factorial(int n) {
+        // code here
+        vector<int> fac = {1};           // Initialize with 1 (0! = 1! = 1)
+    for (int i = 2; i <= n; i++) 
+        multiply(fac, i);            // Multiply fac with each number from 2 to n
+    reverse(fac.begin(), fac.end()); // Reverse the vector to get digits in correct order
+    return fac;
+    }
+};
