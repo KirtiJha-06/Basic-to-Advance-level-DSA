@@ -1,0 +1,41 @@
+Tc: O(m+n)
+SC : O(1)
+
+class Solution {
+public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        // Get the sizes of the two arrays
+        int n = a.size();
+        int m = b.size();
+
+        // Initialize pointers for both arrays
+        int i = 0, j = 0;
+
+        // Variables to store the last two processed elements
+        int m1 = -1, m2 = -1;
+
+        // Traverse until the middle of the merged array
+        for (int count = 0; count <= (m + n) / 2; count++) {
+            // Update m2 to the value of m1
+            m2 = m1;
+
+            // Decide whether to take an element from 'a' or 'b'
+            if (i < n && (j >= m || a[i] <= b[j])) {
+                // If array 'a' is not exhausted and its current element is smaller or equal
+                m1 = a[i++];
+            } else {
+                // Otherwise, take the element from array 'b'
+                m1 = b[j++];
+            }
+        }
+
+        // If the combined size is odd, return the middle element
+        if ((m + n) % 2 == 1) {
+            return m1;
+        } 
+        // If the combined size is even, return the average of the two middle elements
+        else {
+            return (m1 + m2) / 2.0;
+        }
+    }
+};
