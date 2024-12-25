@@ -1,0 +1,33 @@
+TC: O(N^2)
+SC : O(1)
+
+class Solution {
+public:
+    bool hasTripletSum(vector<int> &arr, int target) {
+        // If the array has less than 3 elements, no triplet is possible
+        if (arr.size() < 3) return false;
+
+        // Sort the array for two-pointer technique
+        sort(arr.begin(), arr.end());
+
+        // Iterate through each element as the first number of the triplet
+        for (int i = 0; i < arr.size() - 2; i++) {
+            int st = i + 1;                // Start pointer
+            int end = arr.size() - 1;     // End pointer
+
+            // Two-pointer approach
+            while (st < end) {
+                int ele = arr[i] + arr[st] + arr[end];
+
+                if (ele == target) {
+                    return true;          // Triplet found
+                } else if (ele < target) {
+                    st++;                 // Increase the sum
+                } else {
+                    end--;                // Decrease the sum
+                }
+            }
+        }
+        return false;                     // No triplet found
+    }
+};
