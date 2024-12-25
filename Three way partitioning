@@ -1,0 +1,19 @@
+TC: O(N)
+SC: O(1)
+
+void threeWayPartition(vector<int>& arr, int a, int b) {
+    int start = 0, curr = 0, end = arr.size() - 1;
+
+    while (curr <= end) {
+        if (arr[curr] < a) {
+            swap(arr[start], arr[curr]);  // Place element in the first section
+            start++;
+            curr++;
+        } else if (arr[curr] > b) {
+            swap(arr[curr], arr[end]);   // Place element in the third section
+            end--;
+        } else {
+            curr++;                      // Element belongs in the middle section
+        }
+    }
+}
