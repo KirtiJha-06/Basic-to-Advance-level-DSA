@@ -1,0 +1,28 @@
+Tc: O(N)
+SC: O(1)
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int maxwater = 0; // Variable to track the maximum water area
+        int n = height.size(); // Get the size of the input array
+        int left = 0, right = n - 1; // Two pointers, one at each end of the array
+        
+        // Loop until the two pointers meet
+        while (left < right) {
+            int width = right - left; // Width of the container
+            int ht = min(height[left], height[right]); // Height is determined by the smaller of the two heights
+            int currWater = width * ht; // Calculate the current area
+            maxwater = max(maxwater, currWater); // Update the maximum water area
+            
+            // Move the pointer pointing to the shorter height
+            if (height[left] < height[right]) {
+                left++; // Move the left pointer forward
+            } else {
+                right--; // Move the right pointer backward
+            }
+        }
+        
+        return maxwater; // Return the maximum water area
+    }
+};
