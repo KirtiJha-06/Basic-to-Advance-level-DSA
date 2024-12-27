@@ -1,0 +1,31 @@
+TC: O(N)
+SC: O(N)
+
+class Solution {
+public:
+    int maxProfit(vector<int>& price) {
+        int n = price.size();
+        if (n == 0) return 0; // Edge case: empty price array
+        
+        // Array to store max profit achievable from i to n-1 (backward)
+        vector<int> profit(n, 0);
+
+        // Step 1: Calculate max profit with at most one transaction from i to n-1
+        int max_price = price[n-1];
+        for (int i = n-2; i >= 0; i--) {
+            max_price = max(max_price, price[i]); // Update max_price seen so far
+            profit[i] = max(profit[i+1], max_price - price[i]); // Max profit from i to n-1
+        }
+
+        // Step 2: Calculate max profit with two transactions
+        int res = 0; // To store the result (maximum profit)
+        int min_price = price[0]; // Minimum price seen so far
+        for (int i = 1; i < n; i++) {
+            min_price = min(min_price, price[i]); // Update min_price seen so far
+            // Combine profit[i] (profit from day i to n-1) with (price[i] - min_price)
+            res = max(res, profit[i] + (price[i] - min_price));
+        }
+
+        return res; // Maximum profit with at most two transactions
+    }
+};
