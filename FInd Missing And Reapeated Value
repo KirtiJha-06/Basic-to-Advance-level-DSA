@@ -1,0 +1,36 @@
+TC : O(N^2)
+SC : O(N^2)
+
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        vector<int> ans; // Stores the repeated and missing values.
+        unordered_set<int> s; // Keeps track of seen numbers to detect duplicates.
+        int n = grid.size(); // The grid is of size n x n.
+        int a, b; // `a` for repeated value, `b` for missing value.
+        
+        int expsum = 0, actualsum = 0; // `expsum` is expected sum, `actualsum` is the sum of grid elements.
+        
+        // Traverse the grid to calculate actualsum and find the repeated value.
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                actualsum += grid[i][j]; // Accumulate grid elements.
+
+                if (s.find(grid[i][j]) != s.end()) { // Check if element is repeated.
+                    a = grid[i][j]; // Repeated value found.
+                    ans.push_back(a); // Add repeated value to the result.
+                }
+                s.insert(grid[i][j]); // Add the current element to the set.
+            }
+        }
+        
+        // Calculate the expected sum of numbers from 1 to n*n.
+        expsum = (n * n) * (n * n + 1) / 2;
+
+        // Missing value calculation: b = expsum + a - actualsum.
+        b = expsum + a - actualsum;
+        ans.push_back(b); // Add the missing value to the result.
+        
+        return ans; // Return the result vector.
+    }
+};
