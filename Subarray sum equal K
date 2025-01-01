@@ -1,0 +1,41 @@
+TC : O(N)
+SC : O(N)
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n = nums.size(); // Calculate the size of the input array
+        int count = 0; // Initialize the count of subarrays with sum equal to k
+        vector<int> prefixsum(n, 0); // Create a prefix sum array with size n
+        prefixsum[0] = nums[0]; // Initialize the first element of the prefix sum array
+
+        for (int i = 1; i < n; i++) { 
+            prefixsum[i] = prefixsum[i - 1] + nums[i]; 
+            // Compute cumulative sum for each index and store it in the prefix sum array
+        }
+
+        unordered_map<int, int> mp; // Create a map to store the frequency of prefix sums
+
+        for (int j = 0; j < n; j++) { 
+            if (prefixsum[j] == k) count++; 
+            // Check if the cumulative sum at index j equals k and increment count
+
+            int val = prefixsum[j] - k; 
+            // Calculate the value needed for a previous prefix sum to form a subarray with sum k
+
+            if (mp.find(val) != mp.end()) {
+                count += mp[val]; 
+                // If the required value is in the map, add its frequency to the count
+            }
+
+            if (mp.find(prefixsum[j]) == mp.end()) {
+                mp[prefixsum[j]] = 0; 
+                // Initialize the frequency of the current prefix sum if not already present
+            }
+            mp[prefixsum[j]]++; 
+            // Increment the frequency of the current prefix sum
+        }
+
+        return count; // Return the total count of subarrays with sum equal to k
+    }
+};
