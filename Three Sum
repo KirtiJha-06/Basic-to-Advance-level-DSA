@@ -1,0 +1,42 @@
+TC: O(N^2)
+SC: O(N^2)
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size(); // Get the size of the input array
+        vector<vector<int>> ans; // Initialize the result to store unique triplets
+
+        sort(nums.begin(), nums.end()); // Sort the array to simplify finding triplets
+        for (int i = 0; i < n; i++) { 
+            if (i > 0 && nums[i] == nums[i - 1]) continue; 
+            // Skip duplicate elements to avoid duplicate triplets
+
+            int j = i + 1, k = n - 1; 
+            // Use two pointers: `j` starts right after `i`, `k` starts at the end
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k]; 
+                // Calculate the sum of the triplet
+
+                if (sum < 0) {
+                    j++; 
+                    // If the sum is less than zero, move the left pointer (`j`) to the right
+                } else if (sum > 0) {
+                    k--; 
+                    // If the sum is greater than zero, move the right pointer (`k`) to the left
+                } else {
+                    ans.push_back({nums[i], nums[j], nums[k]}); 
+                    // If the sum is zero, add the triplet to the result
+
+                    j++; k--; 
+                    // Move both pointers to look for other potential triplets
+
+                    while (j < k && nums[j] == nums[j - 1]) j++; 
+                    // Skip duplicate elements for the left pointer
+                }
+            }
+        }
+        return ans; // Return the resulting list of unique triplets
+    }
+};
